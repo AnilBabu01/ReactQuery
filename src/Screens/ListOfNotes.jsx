@@ -14,6 +14,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { backendApiUrl } from "../Config/Config";
+import { toast } from "react-toastify";
 const style = {
   position: "absolute",
   top: "50%",
@@ -71,9 +72,13 @@ const ListOfNotes = () => {
       console.log("Success");
       queryClient.invalidateQueries(["notes"]);
       setOpenalert(false);
+      toast.success('Note Deleted Successfully', {
+        autoClose: 1000,
+      });
     },
     onError: (error) => {
       console.log("Error");
+      toast.error('Something Went Wrong', { autoClose: 1000 });
     },
   });
   const handledelete = () => {
